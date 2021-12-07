@@ -1,5 +1,6 @@
 <script>
-import { getQueryStringArgs } from "./utils/utils";
+import { getQueryStringArgs } from './utils/utils';
+import whiteList from './utils/whitePath'
 import { mapMutations } from 'vuex';
 // 测试2
 export default {
@@ -60,12 +61,15 @@ export default {
         this.$u.vuex('vuex_onlyCorpId', corpId || '');
         this.$u.outLogin();
       } else {
-        // 未登录情况下跳转到登录页
-        if (!token) {
-          this.$u.route({
-            type: 'reLaunch',
-            url: '/pages/login/index'
-          })
+        const path = this.$route.path;
+        if (!whiteList.includes(path)) { // 白名单放行
+          // 未登录情况下跳转到登录页
+          if (!token) {
+            this.$u.route({
+              type: 'reLaunch',
+              url: '/pages/login/index'
+            })
+          }
         }
       }
     },
