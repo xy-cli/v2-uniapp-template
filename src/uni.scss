@@ -1,0 +1,190 @@
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* mixin */
+//* {
+//  touch-action: none;
+//}
+//背景图片
+@mixin bis($url){
+  background:{
+    image:url($url);
+    repeat: no-repeat;
+    size: 100% 100%;
+  }
+}
+//fixed位置
+@mixin fixed($position, $rem ){
+  position:fixed;
+  @if $position == top{
+    top:$rem;
+    left:0;
+    right:0;
+  }
+  @else if $position == bottom{
+    bottom:$rem;
+    left:0;
+    right:0;
+  }
+  @else if $position == left{
+    top:0;
+    bottom:0;
+    left:$rem;
+  }
+  @else if $position == right{
+    top:0;
+    bottom:0;
+    right:$rem;
+  }
+  @else if $position == center{
+    top:50%;
+    left:50%;
+    transform: translate(-50% -50%);
+  }
+}
+//定位居中
+@mixin center{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+
+//宽and高
+@mixin wh($width,$height){
+  width: $width;
+  height:$height;
+}
+
+//字体大小、行高、字体
+@mixin font($size, $line-height, $family: 'Microsoft YaHei') {
+  font: #{$size}/#{$line-height} $family;
+}
+
+//flex
+@mixin flexCenter{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+
+//flex列水平居中
+@mixin flexCenterCol{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@mixin border1($color, $top: '1px', $right: '1px', $bottom: '1px', $left: '1px') {
+  background-image:linear-gradient(180deg, rgba(221, 221, 221, .4), rgba(221, 221, 221, .4) 50%, transparent 50%),
+  linear-gradient(270deg, rgba(221, 221, 221, .4), rgba(221, 221, 221, .4) 50%, transparent 50%),
+  linear-gradient(0deg, rgba(221, 221, 221, .4), rgba(221, 221, 221, .4) 50%, transparent 50%),
+  linear-gradient(90deg, rgba(221, 221, 221, .4), rgba(221, 221, 221, .4) 50%, transparent 50%);
+  background-size: 100% $top,$right 100% ,100% $bottom, $right 100%;
+  background-repeat: no-repeat;
+  background-position: top, right top,  bottom, left top;
+}
+
+/* 颜色变量 */
+
+/* 行为相关颜色 */
+$uni-color-primary: #007aff;
+$uni-color-success: #30c690;
+$uni-color-warning: #FF9064;
+$uni-color-error: #E9614F;
+
+/* 行为相关颜色 */
+//$uni-color: #3E82E0;
+$uni-color: #4FC3FF;
+//$uni-color2: #9080DF;
+$uni-color2: #4FC3FF;
+
+/* 文字基本颜色 */
+$uni-text-color: rgba(8, 28, 56, .85); //基本色
+$uni-text-color-hint: rgba(48, 198, 144, .39); //基本色 提示
+
+/* 边框颜色 */
+$uni-border-color: rgba(62, 130, 224, .5);
+
+/* 尺寸变量 */
+
+/* 文字尺寸 */
+$uni-font-size-sm:24rpx;
+$uni-font-size-base:28rpx;
+$uni-font-size-lg:32rpx;
+
+/* 图片尺寸 */
+$uni-img-size-sm:40rpx;
+$uni-img-size-base:52rpx;
+$uni-img-size-lg:80rpx;
+
+/* Border Radius */
+$uni-border-radius-sm: 4rpx;
+$uni-border-radius-base: 12rpx;
+$uni-border-radius-xm: 24rpx;
+$uni-border-radius-lg: 33rpx;
+$uni-border-radius-circle: 50%;
+$uni-border-box-shadow: 0 0 16rpx 0 rgba(8,28,56,0.07);
+$uni-btn-box-shadow: 0 8rpx 10rpx 0 rgba(121,130,220,0.32);
+
+/* 水平间距 */
+$uni-spacing-row-sm: 10px;
+$uni-spacing-row-base: 20rpx;
+$uni-spacing-row-lg: 30rpx;
+
+/* 垂直间距 */
+$uni-spacing-col-sm: 8rpx;
+$uni-spacing-col-base: 16rpx;
+$uni-spacing-col-lg: 24rpx;
+
+/* 透明度 */
+$uni-opacity-disabled: 0.3; // 组件禁用态的透明度
+
+/* 文章场景相关 */
+$uni-color-title: #2C405A; // 文章标题颜色
+$uni-font-size-title:40rpx;
+$uni-color-subtitle: #555555; // 二级标题颜色
+$uni-font-size-subtitle:36rpx;
+$uni-color-paragraph: #3F536E; // 文章段落颜色
+$uni-font-size-paragraph:30rpx;
+
+@import 'uview-ui/theme.scss';
+
+/* 项目渐变色 */
+.btn-gradient {
+  background: linear-gradient(270deg, $uni-color 0%, $uni-color2 100%);
+  box-shadow: $uni-btn-box-shadow;
+}
+.elp{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+/* 底部固定按钮区 */
+.fixed_bottom-area {
+  max-width: 1000rpx;
+  @include wh(100%, auto);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  bottom: 0;
+  background: #FFFFFF;
+  border-radius: 2px;
+  box-shadow: 0rpx -16rpx 16rpx 0rpx rgba(8,28,56,0.06), 0rpx -1rpx 0rpx 0rpx rgba(239,242,246,1);
+  z-index: 20;
+  padding: 12rpx 36rpx calc(12rpx + env(safe-area-inset-bottom)) 36rpx;
+}

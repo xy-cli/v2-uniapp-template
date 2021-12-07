@@ -1,0 +1,9 @@
+@import "../../uni.scss";
+
+:export{
+  mainColor: $uni-color;
+  success: $uni-color-success;
+  warning: $uni-color-warning;
+  primary: $uni-color-primary;
+  error: $uni-color-error;
+}
