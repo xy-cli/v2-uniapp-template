@@ -1,6 +1,6 @@
 <template>
   <view class="selection" v-if="list.length">
-    <view class="selection-group" @click.stop="toggle">
+    <view class="selection-group" @tap.stop="toggle">
       <text class="elp">{{ list.filter(item => item[vals] === value)[0][keys] }}</text>
       <u-icon name="arrow-down-fill"
               class="select-icon"
@@ -8,14 +8,25 @@
               color="#7d8896"
               size="18rpx"></u-icon>
     </view>
+    <template v-if="visible">
+      <u-mask :show="visible"
+              :zIndex="zIndex"
+              :zoom="false"
+              :style="{top: top+'rpx'}"
+              @click="toggle"></u-mask>
+    </template>
+    <!--    <view class="selection-bg" :class="{active: visible}" @tap.stop="toggle" :style="{-->
+    <!--      top: top+'rpx',-->
+    <!--       zIndex: zIndex,-->
+    <!--    }"></view>-->
     <view class="selection-list"
-          :class="{active: activeFLag}"
+          :class="{active: visible}"
           :style="{
-    top: top+ 'rpx',
+    top: height+ 'rpx',
     zIndex: zIndex,
-    maxHeight: visible ? '1000px' : '0'
+    height: maxHeight
   }">
-      <view class="list">
+      <view class="list" ref="list">
         <view class="list-item" v-for="(item, index) in list"
               :class="value === item[vals] ? 'active' : ''"
               :key="index"
@@ -45,7 +56,11 @@ export default {
       type: String,
       default: ''
     },
-    top: { // 父元素高度
+    height: { // 父元素高度
+      type: String,
+      default: 88
+    },
+    top: { // 背景层
       type: String,
       default: 88
     },
@@ -58,23 +73,21 @@ export default {
       default: '1000'
     }
   },
-  data() {
-    return {
-      activeFLag: true
-    }
-  },
   mounted() {
     // 设置搜索穿透，点击关闭
     document.body.addEventListener('click', () => {
       this.$emit('update:visible', false);
     });
   },
+  computed: {
+    maxHeight() {
+      return (this.visible ? this.$refs.list?.$el.clientHeight : 0) + 'px'
+    }
+  },
   methods: {
     toggle() {
       this.$emit('update:visible', !this.visible);
-      setTimeout(() => {
-        this.activeFLag = !this.visible
-      }, 300)
+      console.log(222)
     },
   }
 }
@@ -83,9 +96,11 @@ export default {
 <style lang="scss" scoped>
 
 .selection{
+  @include wh(100%, 100%);
   &-group{
+    @include wh(100%, 100%);
     @include flexCenter;
-    @include wh(206rpx, 72rpx);
+    max-width: 210rpx;
     text{
       color:rgba(8, 28, 56, 1);
       font-size: 30rpx;
@@ -110,7 +125,7 @@ export default {
     z-index: 100;
     transition: all .2s;
     overflow: hidden;
-    &.active{display:none}
+    //&.active{display:none}
     .list{
       padding:26rpx 36rpx;
       &-item{
@@ -121,6 +136,18 @@ export default {
           color: $uni-color;
         }
       }
+    }
+  }
+  &-bg{
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:-300rpx;
+    background: rgba(0,0,0,.5);
+    display: none;
+    &.active{
+      display: block;
     }
   }
 }

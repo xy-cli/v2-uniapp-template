@@ -4,6 +4,7 @@
   <u-tabbar :list="lists"
             :active-color="$variables.mainColor"
             inactive-color="#808b9a"
+            height="100"
             bg-color="#f9fafc"
             :border-top="false"/>
 </template>
@@ -20,21 +21,23 @@ export default {
     lists() {
       const l = this.$u.deepClone(tabBar);
       const m = this.vuex_isStudent ? [l[0],l[2]] : l
-       return m.map(item => {
-         item.pagePath =  `/${item.pagePath}`
-         return item
-       })
+      return m.map(item => {
+        item.pagePath =  `/${item.pagePath}`
+        return item
+      })
     }
-  },
-  mounted() {
-    const type = sessionStorage.getItem('screenStatus')
-    console.log(type)
   }
 }
 </script>
 
 <style lang="scss" scoped>
- ::v-deep .u-tabbar__content{
-   height:100rpx!important;
- }
+//::v-deep .u-tabbar__content{
+//  height:100rpx!important;
+//}
+::v-deep .u-tabbar__content{
+  max-width:1000rpx;
+  position: fixed;
+  left:50%;
+  transform: translate(-50%, 0);
+}
 </style>

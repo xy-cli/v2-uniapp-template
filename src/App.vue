@@ -1,5 +1,5 @@
 <script>
-import { getQueryStringArgs } from './utils/utils';
+import { getQueryStringArgs } from "./utils/utils";
 import whiteList from './utils/whitePath'
 import { mapMutations } from 'vuex';
 // 测试2
@@ -91,7 +91,6 @@ export default {
     setWindowInfo() {
       uni.getSystemInfo({
         success: res => {
-          console.log(res)
           const platform = res.platform;
           const ua = navigator.userAgent;
           const isAndroid = /(?:Android)/.test(ua);
@@ -143,22 +142,21 @@ export default {
 </script>
 
 <style lang="scss">
-.uni-body{
-  //width:100vw;
-  background: url("./static/image/backgroundWhite.png")no-repeat 100% 100%;
-}
 /* 注意要写在第一行，同时给style标签加入lang="scss"属性 */
 @import "uview-ui/index";
+body{
+  //@include bis('./static/image/backgroundWhite.png')
+  //background: linear-gradient(50%, #999, #444);
+  background: linear-gradient(180deg, #999 0%, #555 100%);
+}
+page{
+  background-color: #F8F8F8;
+  min-height:100vh;
+}
 .uni-app--maxwidth{
   max-width: 1000rpx;
   margin: 0 auto;
   background: #FFFFFF;
   position: relative;
-}
-.u-tabbar__content{
-  max-width:1000rpx!important;
-  position: fixed;
-  left:50% !important;
-  transform: translate(-50%, 0);
 }
 </style>

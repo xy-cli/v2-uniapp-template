@@ -43,10 +43,10 @@ module.exports = {
         if(!(process.env.VUE_APP_ENV === 'dev')) {
           roleType = this.$route.query.roleType || data.roleType
         }
-        this.$u.vuex('vuex_user.campusId', data.campusId || '');
-        this.$u.vuex('vuex_user.roleType', roleType);
-        this.$u.vuex('vuex_user.name', data.name || '');
-        this.$u.vuex('vuex_user.avatar', data.avatar || '');
+        const userInfo = this.$u.deepMerge(this.vuex_user, data)
+        this.$u.vuex('vuex_user', userInfo)
+        this.$u.vuex('vuex_user.roleType', roleType) // 单独设置保持开发环境权限
+        console.log('登录信息+校区信息',this.vuex_user)
         const { userId } = this.vuex_user;
         if (userId) {
           if (Number(data.type) === 0) {
@@ -64,8 +64,7 @@ module.exports = {
           })
         }
       })
-    }
-
+    };
 	},
 	computed: {
 		// 将vuex的state中的所有变量，解构到全局混入的mixin中

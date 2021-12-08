@@ -14,6 +14,10 @@ const install = (Vue, vm) => {
     getCodeInfo: (params = {}) => vm.$u.get('/api/code', params),
     // 获取老师权限
     getAuthorityByUser: (params = {}) => vm.$u.get('/weekly-api/teacher/group/query/authorityByUserId', params),
+    // 获取老师拥有的校区列表
+    getCampusList: (params = {}) => vm.$u.get('/weekly-api/teacher/group/query/campusByAppInfoId', params),
+    // 获取首页小组接口
+    getGroupInfo: (params = {}) => vm.$u.get('/weekly-api/teacher/group/query/teacher/group/info', params),
     // 查看所有模板
     getAllTemplate: (params = {}) => vm.$u.get('/weekly-api/my/groupInfo/my/toSeeAllTemplate', params),
   };

@@ -158,6 +158,10 @@ $uni-color-paragraph: #3F536E; // 文章段落颜色
 $uni-font-size-paragraph:30rpx;
 
 @import 'uview-ui/theme.scss';
+body,html{
+  width:100%;
+  height:auto;
+}
 
 /* 项目渐变色 */
 .btn-gradient {
