@@ -11,25 +11,25 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      platform: '',
+      platform: ''
     }
   },
   methods: {
     /**
      * 登录
      */
-    login() {
-      if(process.env.VUE_APP_ENV === 'dev') {
+    login () {
+      if (process.env.VUE_APP_ENV === 'dev') {
         this.setLoginInfo({
-          token: "mocktoken",
-          name: "李白",
+          token: 'mocktoken',
+          name: '李白',
           avatar: 'https://up.enterdesk.com/edpic_source/3c/71/e5/3c71e52376ccf6dd8687e60e7a9e3515.jpg',
           unionid: null,
           campusId: '879751027299332096',
-          userId: "887343620064595968",
-          corpid: "dingb7ace041c733167cf2c783f7214b6d69",
+          userId: '887343620064595968',
+          corpid: 'dingb7ace041c733167cf2c783f7214b6d69',
           appInfoId: 3352,
           roleType: 0
         })
@@ -39,11 +39,11 @@ export default {
       } else {
         const { formType } = this.vuex_sys
         if (formType === 'wx') {
-          this.wxLogin();
+          this.wxLogin()
         } else if (formType === 'dingTalk') {
-          this.dingTalkLogin();
+          this.dingTalkLogin()
         } else {
-          this.$toast.none('仅支持在钉钉或微信环境在登录');
+          this.$toast.none('仅支持在钉钉或微信环境在登录')
         }
       }
       console.log('login')
@@ -51,30 +51,30 @@ export default {
     /**
      * 微信环境登录，未开发
      */
-    wxLogin() {
+    wxLogin () {
       console.log('微信登录！')
     },
     /**
      * 钉钉环境登录
      */
-    dingTalkLogin() {
-      const onlyCorpId = this.vuex_onlyCorpId;
-      console.log('钉钉登录！');
-      console.log('登录前取onlyCorpId：' + onlyCorpId);
+    dingTalkLogin () {
+      const onlyCorpId = this.vuex_onlyCorpId
+      console.log('钉钉登录！')
+      console.log('登录前取onlyCorpId：' + onlyCorpId)
       if (onlyCorpId) {
-        this.$u.vuex('vuex_user.corpid', onlyCorpId);
+        this.$u.vuex('vuex_user.corpid', onlyCorpId)
         dd.ready(() => {
           dd.runtime.permission.requestAuthCode({
             corpId: onlyCorpId, // 企业id
             onSuccess: ({ code }) => {
-              console.log(code);
-              this.$toast.none('获取授权码成功，正在登录中');
+              console.log(code)
+              this.$toast.none('获取授权码成功，正在登录中')
               this.$u.api.getCodeInfo({
                 authCode: code, // 通过该免登授权码可以获取用户身份
                 corpid: onlyCorpId,
                 sid: this.config.sid || ''
               }).then(({ data }) => {
-                this.setLoginInfo(data);
+                this.setLoginInfo(data)
               })
             },
             onFail: (err) => {
@@ -90,10 +90,10 @@ export default {
      * 设置登录信息存入缓存
      * @param info
      */
-    async setLoginInfo(info) {
-      await this.$u.vuex('vuex_user', info);
-      await this.$u.getAuthorityByUser();
-    },
+    async setLoginInfo (info) {
+      await this.$u.vuex('vuex_user', info)
+      await this.$u.getAuthorityByUser()
+    }
   }
 }
 </script>

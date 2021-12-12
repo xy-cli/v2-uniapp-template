@@ -134,7 +134,7 @@ export default {
     { studentName: '周杰伦yyds', score: '+10' },
     { studentName: '周杰伦yyds', score: '+10' },
     { studentName: '周杰伦yyds', score: '+10' },
-    { studentName: '周杰伦yyds', score: '+10' },
+    { studentName: '周杰伦yyds', score: '+10' }
   ],
   groupList: [
     { label: '默认排序k默认排序k', value: 1 },

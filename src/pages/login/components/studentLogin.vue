@@ -53,7 +53,7 @@
 <script>
 import Ras from '@/utils/rasKey'
 export default {
-  data() {
+  data () {
     return {
       accountName: '',
       accountPwd: ''
@@ -63,28 +63,28 @@ export default {
     /**
      * 学生账号登录
      */
-    async studentLogin() {
+    async studentLogin () {
       if (this.accountPwd.length < 5) {
         this.$toast.none('密码不能少于5位')
       } else {
         const { data } = await this.$u.api.getStudentInfo({
           accountName: this.accountName,
           accountPwd: Ras.encrypted(this.accountPwd)
-        });
+        })
         this.$u.vuex('vuex_user', Object.assign({}, {
           roleType: 2 // 学生账号，默认给3
-        }, data));
+        }, data))
         uni.switchTab({
-          url:  '/pages/home/index'
-        });
+          url: '/pages/home/index'
+        })
       }
     }
   },
-  mounted() {
+  mounted () {
     if (this.vuex_user.token) { // 登录页打开，判断有无token
       uni.switchTab({
         url: '/pages/home/index'
-      });
+      })
     }
     if (process.env.VUE_APP_ENV === 'dev') {
       this.accountName = 'qzxq24588'

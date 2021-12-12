@@ -46,83 +46,83 @@
       </view>
       <u-toast ref="uToast"></u-toast>
     </view>
-	</view>
+  </view>
 </template>
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       title: 'Wait',
       phoneNumber: '',
       codeNumber: '',
       tips: '',
-			seconds: process.env.VUE_APP_ENV === 'development' ? 20 : 59,
-      sendWait: false,
+      seconds: process.env.VUE_APP_ENV === 'development' ? 20 : 59,
+      sendWait: false
     }
   },
   methods: {
-    codeChange(text) {
-			this.tips = text;
+    codeChange (text) {
+      this.tips = text
     },
-    getCode() {
-      if(this.$refs.uCode.canGetCode) {
-        if(!this.$u.test.mobile(this.phoneNumber)) {
-          this.$toast.none('请输入正确的手机号码');
-          return false;
+    getCode () {
+      if (this.$refs.uCode.canGetCode) {
+        if (!this.$u.test.mobile(this.phoneNumber)) {
+          this.$toast.none('请输入正确的手机号码')
+          return false
         }
         // 模拟向后端请求验证码
         uni.showLoading({
           title: '正在获取验证码'
         })
-        let that = this;
+        const that = this
         setTimeout(() => {
-          that.$u.api.sendCode( {mobile: that.phoneNumber}).then(() => {
-            uni.hideLoading();
+          that.$u.api.sendCode({ mobile: that.phoneNumber }).then(() => {
+            uni.hideLoading()
             // 这里此提示会被this.start()方法中的提示覆盖
-            that.$u.toast('验证码已发送');
+            that.$u.toast('验证码已发送')
             // 通知验证码组件内部开始倒计时
-            that.$refs.uCode.start();
+            that.$refs.uCode.start()
           })
-        }, Math.random()*1000);
+        }, Math.random() * 1000)
       } else {
-        this.$u.toast('倒计时结束后再发送');
+        this.$u.toast('倒计时结束后再发送')
       }
     },
     /**
      * 绑定手机号
      */
-    bindMobile() {
+    bindMobile () {
       uni.showLoading({
         title: '正在绑定手机号码'
       })
-      let that = this;
+      const that = this
       setTimeout(() => {
-        that.$u.api.bindMobile({mobile: that.phoneNumber, code: that.codeNumber}).then(({ success, data }) => {
-          uni.hideLoading();
+        that.$u.api.bindMobile({ mobile: that.phoneNumber, code: that.codeNumber }).then(({ success, data }) => {
+          uni.hideLoading()
           if (success === true) {
-            that.$u.toast('手机号码绑定成功');
+            that.$u.toast('手机号码绑定成功')
           } else {
-            this.$toast.none('手机号码绑定失败');
-            return false;
+            this.$toast.none('手机号码绑定失败')
+            return false
           }
           setTimeout(() => {
-            this.$u.vuex('vuex_user', data);
-            uni.reLaunch({url: '/pages/home/index'});
-          }, 500);
+            this.$u.vuex('vuex_user', data)
+            uni.reLaunch({ url: '/pages/home/index' })
+          }, 500)
         })
-      }, Math.random()*1000);
+      }, Math.random() * 1000)
     },
-    end() {
+    end () {
       // this.$u.toast('倒计时结束');
-      this.sendWait = false;
+      this.sendWait = false
     },
-    start() {
+    start () {
       // this.$u.toast('倒计时开始');
-      this.sendWait = true;
+      this.sendWait = true
     }
   },
-  onLoad() {
+  onLoad () {
   }
 }
 </script>

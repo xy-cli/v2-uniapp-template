@@ -1,4 +1,5 @@
-let findEle = (parent, type) => {
+/* eslint-disable */
+const findEle = (parent, type) => {
   return parent.tagName.toLowerCase() === type ? parent : parent.querySelector(type)
 }
 
@@ -15,10 +16,10 @@ const emoji = {
     const regList = [
       { name: 'emoji', reg: /[^\a-\z\A-\Z0-9\u4E00-\u9FA5\（\(\）\)]/g },
       { name: 'isNumAlphaCn', reg: /[^\a-\z\A-\Z0-9\u4E00-\u9FA5\（\(\）\)\,\，\、]/g },
-      { name: 'isNumAlpha', reg: /[^\a-\z\A-\Z0-9]/g },
-    ];
-    const regName = binding.value ? binding.value.split(',').map(item => item.trim()) : ['emoji'];
-    const reg = regList.filter(item => regName.includes(item.name)) || regList[0];
+      { name: 'isNumAlpha', reg: /[^\a-\z\A-\Z0-9]/g }
+    ]
+    const regName = binding.value ? binding.value.split(',').map(item => item.trim()) : ['emoji']
+    const reg = regList.filter(item => regName.includes(item.name)) || regList[0]
     let $inp = findEle(el, 'input')
     if ($inp === null) {
       $inp = findEle(el, 'textarea')
@@ -26,7 +27,7 @@ const emoji = {
     el.$inp = $inp
     $inp.handle = function () {
       let val = $inp.value
-      for (let item of reg) {
+      for (const item of reg) {
         val = val.replace(item.reg, '')
       }
       $inp.value = val
@@ -36,7 +37,7 @@ const emoji = {
   },
   unbind: function (el) {
     el.$inp.removeEventListener('blur', el.$inp.handle)
-  },
+  }
 }
 
 export default emoji

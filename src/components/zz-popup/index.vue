@@ -28,15 +28,15 @@ export default {
   name: 'myPopup',
   props: {
     visible: { type: Boolean, default: false },
-    content: { type: String, default: '空内容'},
+    content: { type: String, default: '空内容' },
     cancelBtnText: { type: String, default: '取消' },
     confirmBtnText: { type: String, default: '确认' },
-    size: { type: Object, default: () => {return {width: '536rpx', height: 'auto'}} },
+    size: { type: Object, default: () => { return { width: '536rpx', height: 'auto' } } },
     maskCloseAble: { type: Boolean, default: true }
   },
   components: {
   },
-  data() {
+  data () {
     return {
       options: {
         mode: 'center',
@@ -47,18 +47,18 @@ export default {
     }
   },
   methods: {
-    cancel() {
-      this.$emit('cancel');
-      this.close();
+    cancel () {
+      this.$emit('cancel')
+      this.close()
     },
-    confirm() {
+    confirm () {
       this.$u.debounce(() => {
-        this.$emit('confirm');
-      }, 500, true);
+        this.$emit('confirm')
+      }, 500, true)
       // this.close();
     },
-    close() {
-      this.$emit('update:visible', false);
+    close () {
+      this.$emit('update:visible', false)
     }
   }
 }

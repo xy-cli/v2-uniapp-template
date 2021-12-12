@@ -6,20 +6,20 @@
 </template>
 
 <script>
-	export default {
-		name: 'qiun-error',
-		props: {
-			errorMessage: {
-				type: String,
-				default: null
-			},
-		},
-		data() {
-			return {
-				
-			};
-		},
-	}
+export default {
+  name: 'qiun-error',
+  props: {
+    errorMessage: {
+      type: String,
+      default: null
+    }
+  },
+  data () {
+    return {
+
+    }
+  }
+}
 </script>
 
 <style>

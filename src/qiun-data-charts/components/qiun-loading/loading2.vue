@@ -1,21 +1,21 @@
 <template>
-	 <view class="container loading2">
-		<view class="shape shape1"></view>
-		<view class="shape shape2"></view>
-		<view class="shape shape3"></view>
-		<view class="shape shape4"></view>
-	</view>
+  <view class="container loading2">
+    <view class="shape shape1"></view>
+    <view class="shape shape2"></view>
+    <view class="shape shape3"></view>
+    <view class="shape shape4"></view>
+  </view>
 </template>
 
 <script>
-	export default {
-		name: 'loading2',
-		data() {
-			return {
-				
-			};
-		}
-	}
+export default {
+  name: 'loading2',
+  data () {
+    return {
+
+    }
+  }
+}
 </script>
 
 <style scoped="true">
@@ -60,7 +60,6 @@
   right: 0;
   background-color: #EE6666;
 }
-
 
 .loading2 .shape1 {
   -webkit-animation: animation2shape1 0.5s ease 0s infinite alternate;

@@ -37,36 +37,35 @@
 </template>
 
 <script>
-import TabBar from '@/components/zz-tabbar';
+import TabBar from '@/components/zz-tabbar'
 export default {
   name: 'index',
   components: { TabBar },
-  data() {
+  data () {
     return {
       weeklyGroupList: [],
       height: ''
     }
   },
-  onShow() {
-    this.$setNavTitle('我的');
+  onShow () {
+    this.$setNavTitle('我的')
     uni.getSystemInfo({
       success: res => {
-        this.height = res.windowHeight;
+        this.height = res.windowHeight
       }
     })
   },
   computed: {
-    avatarName() {
+    avatarName () {
       try {
-        let arr = this.vuex_user?.name?.split('');
-        return arr.splice(-2,2).join('') || '未知';
+        const arr = this.vuex_user?.name?.split('')
+        return arr.splice(-2, 2).join('') || '未知'
       } catch (e) {
         return '未知'
       }
     },
-    options() {
-      const campusName = '未选择';
-      const groupName = '未选择'
+    options () {
+      const campusName = '未选择'
       const list = [
         // 0--管理员权限 1--普通老师权限 2--学生账号
         { title: '校区', path: '/pages/profile/switchCampus', name: campusName, roleType: [0, 1] },
@@ -75,9 +74,9 @@ export default {
         { title: '学生值周账号', path: '/pages/profile/studentManage/index', roleType: [0] },
         { title: '值周小结记录', path: '/pages/profile/weekSummary/index', roleType: [0, 1, 2] },
         { title: '流动红旗管理', path: '/pages/profile/flowRedManage/index', roleType: [0] },
-        { title: '流动红旗记录', path: '/pages/profile/flowRedRecord/index', roleType: [0, 1, 2] },
+        { title: '流动红旗记录', path: '/pages/profile/flowRedRecord/index', roleType: [0, 1, 2] }
         // { title: '数据大屏', path: '', roleType: [0, 1] }
-      ];
+      ]
       return list.filter(item => item.roleType.includes(Number(this.vuex_user.roleType)))
     }
   }
@@ -179,24 +178,4 @@ export default {
     }
   }
 }
-// position: relative;
-// overflow: hidden;
-// .active {
-//   position: absolute;
-//   animation: animated 0.8s;
-// }
-// @keyframes animated{
-// 	0%{
-// 		width: 0px;
-// 		height: 0px;
-// 		opacity: 1;
-// 		background: rgba(0,0,0,.25);
-// 	}
-// 	100%{
-// 		width: 1000px;
-// 		height: 1000px;
-// 		opacity: 0;
-// 		background: transparent;
-// 	}
-// }
 </style>

@@ -19,7 +19,7 @@ export default {
       default: '数据为空'
     }
   },
-  data() {
+  data () {
     return {}
   }
 }

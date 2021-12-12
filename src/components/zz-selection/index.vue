@@ -57,11 +57,11 @@ export default {
       default: ''
     },
     height: { // 父元素高度
-      type: String,
+      type: [Number, String],
       default: 88
     },
     top: { // 背景层
-      type: String,
+      type: [Number, String],
       default: 88
     },
     list: { // 列表
@@ -73,22 +73,22 @@ export default {
       default: '1000'
     }
   },
-  mounted() {
+  mounted () {
     // 设置搜索穿透，点击关闭
     document.body.addEventListener('click', () => {
-      this.$emit('update:visible', false);
-    });
+      this.$emit('update:visible', false)
+    })
   },
   computed: {
-    maxHeight() {
+    maxHeight () {
       return (this.visible ? this.$refs.list?.$el.clientHeight : 0) + 'px'
     }
   },
   methods: {
-    toggle() {
-      this.$emit('update:visible', !this.visible);
+    toggle () {
+      this.$emit('update:visible', !this.visible)
       console.log(222)
-    },
+    }
   }
 }
 </script>

@@ -19,7 +19,7 @@ import StudentLogin from './components/studentLogin'
 export default {
   name: 'index',
   components: { Login, StudentLogin },
-  data() {
+  data () {
     return {}
   }
 }

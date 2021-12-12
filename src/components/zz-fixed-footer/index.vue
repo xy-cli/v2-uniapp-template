@@ -19,7 +19,7 @@
 </template>
 
 <script>
-var _self;
+var _self
 export default {
   name: 'fixedFooter',
   props: {
@@ -35,52 +35,52 @@ export default {
       // ]
     }
   },
-  data() {
+  data () {
     return {
       // 处理软键盘顶起底部fixed元素
       footer: true,
-			windowHeight: '',
+      windowHeight: '',
       timer_ff: null
     }
   },
-  mounted() {
+  mounted () {
     /**
      * 添加页面布局大小改变监听，使底部fixed元素显隐
      * 处理当手机软件盘弹起时，fixed在底部的元素被顶起的问题
      */
-    _self = this;
+    _self = this
     uni.getSystemInfo({
-			success: (res)=> {
-				_self.windowHeight = res.windowHeight;
-			}
-		});
-		uni.onWindowResize((res) => {
-			if(res.size.windowHeight < _self.windowHeight){
-				_self.footer= false
-			}else{
-				_self.footer = true
-			}
-		})
+      success: (res) => {
+        _self.windowHeight = res.windowHeight
+      }
+    })
+    uni.onWindowResize((res) => {
+      if (res.size.windowHeight < _self.windowHeight) {
+        _self.footer = false
+      } else {
+        _self.footer = true
+      }
+    })
   },
   watch: {
-    'show_add'(newval, oldval) {
+    'show_add' (newval, oldval) {
       if (!newval) {
-        this.nameValue = '';
+        this.nameValue = ''
       }
     }
   },
   methods: {
-    clickBtn(item) {
+    clickBtn (item) {
       if (this.timer_ff) {
         // 定时器正在执行中，跳过
-        return;
+        return
       }
-      let eventName = item.event;
-      this.$emit(eventName);
+      const eventName = item.event
+      this.$emit(eventName)
       this.timer_ff = setTimeout(() => {
-        clearTimeout(this.timer_ff);
-        this.timer_ff = null;
-      },  500);
+        clearTimeout(this.timer_ff)
+        this.timer_ff = null
+      }, 500)
     }
   }
 }

@@ -13,16 +13,16 @@
 import tabBar from '@/utils/tabBar'
 export default {
   name: 'index',
-  data() {
+  data () {
     return {
     }
   },
   computed: {
-    lists() {
-      const l = this.$u.deepClone(tabBar);
-      const m = this.vuex_isStudent ? [l[0],l[2]] : l
+    lists () {
+      const l = this.$u.deepClone(tabBar)
+      const m = this.vuex_isStudent ? [l[0], l[2]] : l
       return m.map(item => {
-        item.pagePath =  `/${item.pagePath}`
+        item.pagePath = `/${item.pagePath}`
         return item
       })
     }

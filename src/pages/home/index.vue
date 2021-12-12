@@ -72,8 +72,8 @@
       <!--点评按钮-->
       <view class="footer">
         <view class="footer--check" @tap.stop="studentCheckAll">
-          <img v-if="checkAll" src="../../static/image/home/check-btn_chose.png"></img>
-          <img v-else src="../../static/image/home/check-btn.png"></img>
+          <img v-if="checkAll" src="../../static/image/home/check-btn_chose.png"/>
+          <img v-else src="../../static/image/home/check-btn.png"/>
           <text>{{checkAll ? '取消' : ''}}全选</text>
         </view>
         <view class="footer--btn"
@@ -98,11 +98,11 @@
 </template>
 <script>
 import Selection from '@/components/zz-selection'
-import TabBar from '@/components/zz-tabbar';
+import TabBar from '@/components/zz-tabbar'
 import json from '@/utils/json'
 export default {
   components: { TabBar, Selection },
-  data() {
+  data () {
     return {
       title: 'hello uni-app',
       visible: false,
@@ -113,76 +113,76 @@ export default {
       studentList: [], // 学生列表
       enable: true, // 吸顶监听
       disabled: true, // 点评按钮是否可点击
-      checkAll: false, // 是否全选
+      checkAll: false // 是否全选
     }
   },
-  async onShow() {
+  async onShow () {
     this.enable = true
   },
-  async onLoad() {
+  async onLoad () {
     await this.getCampusList()
     await this.getGroupInfo()
     await this.getStudentList()
   },
-  onHide() {
+  onHide () {
     this.enable = false
   },
   filters: {
-    scoreFilter(score) {
-      const scoreStr = String(score);
+    scoreFilter (score) {
+      const scoreStr = String(score)
       return scoreStr.includes('+') ? 'success' : scoreStr.includes('-') ? 'warning' : ''
     }
   },
   methods: {
-    async getStudentList() {
+    async getStudentList () {
       this.studentList = json.studentList.map((item, index) => {
-        const n = index+1
-        const number = n > 9 ? n : '0'+(n)
+        const n = index + 1
+        const number = n > 9 ? n : '0' + (n)
         item.studentName = item.studentName.substring(0, 4)
         this.$set(item, 'check', false)
         this.$set(item, 'number', number)
         return item
       })
     },
-    async getCampusList() {
+    async getCampusList () {
       const { data } = await this.$u.api.getCampusList()
-      // console.log(data)
+      console.log(data)
     },
-    async getGroupInfo() {
+    async getGroupInfo () {
       const { data } = await this.$u.api.getGroupInfo()
-      // console.log(data)
+      console.log(data)
     },
-    studentCheck(item) {
+    studentCheck (item) {
       item.check = !item.check
-      this.flagJudge();
+      this.flagJudge()
     },
-    studentCheckAll() {
-      const checkList = this.studentList.filter(item => item.check);
-      const flag = checkList.length < this.studentList.length; // 选中的小于全部，表示未全部选中
+    studentCheckAll () {
+      const checkList = this.studentList.filter(item => item.check)
+      const flag = checkList.length < this.studentList.length // 选中的小于全部，表示未全部选中
       this.studentList.map(item => {
-        item.check = flag;
-        return item;
+        item.check = flag
+        return item
       })
-      this.flagJudge();
+      this.flagJudge()
     },
-    flagJudge() {
+    flagJudge () {
       this.$nextTick(() => {
-        const check = this.studentList.filter(item => item.check);
-        this.checkAll = check.length === this.studentList.length; // 选中的和总数据比较，判断是否全选
-        this.disabled = !check.length; // 根据选中值判断是否可点击
+        const check = this.studentList.filter(item => item.check)
+        this.checkAll = check.length === this.studentList.length // 选中的和总数据比较，判断是否全选
+        this.disabled = !check.length // 根据选中值判断是否可点击
       })
     },
-    change() {
+    change () {
       const list = this.studentList.filter(item => item.check)
-      this.$u.vuex('vuex_remarkOnList' ,{
+      this.$u.vuex('vuex_remarkOnList', {
         type: 'add', // 添加标识 add ,编辑edit
         list // 学生列表
       })
-      uni.navigateTo({ url: '/pages/remarkOn/index' });
+      uni.navigateTo({ url: '/pages/remarkOn/index' })
     },
-    addGroup() {
+    addGroup () {
       console.log('添加小组')
-    },
+    }
   }
 }
 </script>

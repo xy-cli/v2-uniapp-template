@@ -13,10 +13,10 @@
   </view>
 </template>
 <script>
-import TabBar from '@/components/zz-tabbar';
+import TabBar from '@/components/zz-tabbar'
 export default {
   components: { TabBar },
-  data() {
+  data () {
     return {
       title: '每日一练'
     }

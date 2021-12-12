@@ -39,13 +39,13 @@ export default {
     }
   },
   methods: {
-    close() {
+    close () {
       this.$emit('update:visible', false)
     },
-    confirm() {
+    confirm () {
       this.$u.debounce(() => {
-        this.$emit('confirm');
-      }, 500, true);
+        this.$emit('confirm')
+      }, 500, true)
     }
   }
 }

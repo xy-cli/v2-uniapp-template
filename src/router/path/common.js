@@ -12,12 +12,12 @@ module.exports = [
     style: {
       navigationBarTitleText: '登录'
     }
-  },{
+  }, {
     path: 'pages/login/bindTel',
     style: {
       navigationBarTitleText: '绑定手机号'
     }
-  },{
+  }, {
     path: 'pages/noAccess/index',
     style: {
       navigationBarTitleText: '无权限'

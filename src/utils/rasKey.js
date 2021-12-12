@@ -7,13 +7,13 @@ const rasKey = {
 const key = process.env.VUE_APP_ENV === 'online' ? rasKey.online : rasKey.qa
 export default {
   encrypted: (val) => {
-    let encrypt = new JSEncrypt();
-    encrypt.setPublicKey(key);
-    return encrypt.encrypt(val) || '---';
+    const encrypt = new JSEncrypt()
+    encrypt.setPublicKey(key)
+    return encrypt.encrypt(val) || '---'
   },
   uncrypted: (val) => {
-    let decrypt = new JSEncrypt();
-    decrypt.setPrivateKey(key);
+    const decrypt = new JSEncrypt()
+    decrypt.setPrivateKey(key)
     return decrypt.decrypt(val) || '---'
   }
 }
