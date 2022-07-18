@@ -67,7 +67,7 @@ export default {
     options () {
       const campusName = '未选择'
       const list = [
-        // 0--管理员权限 1--普通老师权限 2--学生账号
+        // 0--管理员权限 1--普通老师权限 2--学生账号a
         { title: '校区', path: '/pages/profile/switchCampus', name: campusName, roleType: [0, 1] },
         { title: '小组管理', path: '/pages/profile/selectGroup/index', roleType: [0] },
         { title: '模板管理', path: '/pages/profile/templateManage/index', roleType: [0] },
