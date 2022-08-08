@@ -1,6 +1,13 @@
+/*
+ * @Author: ss shangs@schbrain.com
+ * @Date: 2022-07-15 14:08:02
+ * @LastEditors: ss shangs@schbrain.com
+ * @LastEditTime: 2022-08-08 10:59:21
+ * @FilePath: /v2-uni-app/src/store/$u.mixin.js
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import { mapState } from 'vuex'
 import store from '@/store'
-import { getQueryStringArgs } from '../utils/utils'
 import variables from '../static/style/variables.scss'
 
 // 尝试将用户在根目录中的store/login.js的vuex的state变量，全部加载到全局变量中
@@ -25,45 +32,7 @@ module.exports = {
      * 退出登录
      */
     this.$u.outLogin = () => {
-      const config = getQueryStringArgs()
-      const url = config.corpid ? `/pages/login/index?corpid=${config.corpid}&sid=${config.sid}&wpkbid=${config.wpkbid}` : '/pages/login/index'
       this.$u.vuex('vuex_user', {})
-      uni.reLaunch({ url })
-    }
-    /**
-     * 获取权限信息
-     * 切换校区信息会更改，需要重新获取
-     * 首次登录需要获取
-     * 校区Id、roleType权限、name、avatar全部更新，校区改变，内容会变
-     * 判断权限
-     */
-    this.$u.getAuthorityByUser = () => {
-      this.$u.api.getAuthorityByUser().then(({ data }) => {
-        let roleType = 0 // 开发环境权限全开。0--管理员权限 1--普通老师权限 2--学生账号
-        if (!(process.env.VUE_APP_ENV === 'dev')) {
-          roleType = this.$route.query.roleType || data.roleType
-        }
-        const userInfo = this.$u.deepMerge(this.vuex_user, data)
-        this.$u.vuex('vuex_user', userInfo)
-        this.$u.vuex('vuex_user.roleType', roleType) // 单独设置保持开发环境权限
-        console.log('登录信息+校区信息', this.vuex_user)
-        const { userId } = this.vuex_user
-        if (userId) {
-          if (Number(data.type) === 0) {
-            uni.switchTab({
-              url: '/pages/home/index'
-            })
-          } else {
-            uni.reLaunch({
-              url: '/pages/noAccess/index'
-            })
-          }
-        } else {
-          uni.reLaunch({
-            url: '/pages/login/bindTel'
-          })
-        }
-      })
     }
   },
   computed: {

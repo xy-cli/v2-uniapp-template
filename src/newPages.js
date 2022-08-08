@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-11-01 15:58:31
- * @LastEditTime: 2021-11-30 09:15:10
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-08-08 11:17:19
+ * @LastEditors: ss shangs@schbrain.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /uni-module/src/newPages.js
  */
@@ -15,6 +15,8 @@ const data = {
   },
   pages: pages,
   globalStyle: {
+    maxWidth: 500,
+    rpxCalcMaxDeviceWidth: 375,
     // #ifndef APP-PLUS
     navigationStyle: 'custom',
     // #endif
@@ -24,7 +26,7 @@ const data = {
   },
   tabBar: {
     color: '#808b9a',
-    selectedColor: '#4782e0',
+    selectedColor: '#4FC3FF',
     borderStyle: 'white',
     fontSize: '12px',
     backgroundColor: '#f9fafc',

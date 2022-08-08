@@ -1,3 +1,11 @@
+/*
+ * @Author: ss shangs@schbrain.com
+ * @Date: 2022-05-23 11:24:31
+ * @LastEditors: ss shangs@schbrain.com
+ * @LastEditTime: 2022-08-08 10:45:19
+ * @FilePath: /v2-uni-app/src/store/index.js
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
@@ -13,9 +21,7 @@ try {
 
 // 需要永久存储，且下次APP启动需要取出的，在state中的变量名
 const saveStateKeys = [
-  'vuex_user',
-  'vuex_isStudent',
-  'vuex_onlyCorpId'
+  'vuex_user'
 ]
 
 // 保存变量到本地存储中
@@ -41,10 +47,7 @@ const store = new Vuex.Store({
       roleType: 0 // 0 管理员 1.普通老师
     },
     // 如果vuex_version无需保存到本地永久存储，无需lifeData.vuex_version方式
-    vuex_version: '1.0.0',
-    vuex_sys: {}, // 当前设备宽高信息
-    vuex_isStudent: lifeData.vuex_isStudent || true, // 学生账号进去应用 true ,其他false
-    vuex_onlyCorpId: lifeData.vuex_onlyCorpId ? lifeData.vuex_onlyCorpId : '' // 保存corpId
+    vuex_version: '1.0.0'
   },
   mutations: {
     $uStore (state, payload) {
@@ -57,30 +60,17 @@ const store = new Vuex.Store({
         for (let i = 1; i < len - 1; i++) {
           obj = obj[nameArr[i]]
         }
-        obj[nameArr[len - 1]] = payload.value
+        // obj[nameArr[len - 1]] = payload.value
+        Vue.set(state[nameArr[0]], nameArr[[len - 1]], payload.value)
         saveKey = nameArr[0]
       } else {
         // 单层级变量，在state就是一个普通变量的情况
-        state[payload.name] = payload.value
+        // state[payload.name] = payload.value
+        Vue.set(state, payload.name, payload.value)
         saveKey = payload.name
       }
       // 保存变量到本地，见顶部函数定义
       saveLifeData(saveKey, state[saveKey])
-    },
-    $setIsStudent (state, value) {
-      const flag = value
-      // 判断设置来源，用于设置tabBar
-      // const isStudent = window.sessionStorage.getItem('isStudent') || window.localStorage.getItem('isStudent');
-      // 钉钉存localStorage ,浏览器存sessionStorage
-      if (dd && dd.env.platform !== 'notInDingTalk') {
-        console.log('走弱缓存')
-        window.sessionStorage.setItem('isStudent', flag)
-      } else {
-        console.log('走强缓存')
-        window.localStorage.setItem('isStudent', flag)
-      }
-      state.vuex_isStudent = flag
-      console.log('vuex_isStudent', state.vuex_isStudent)
     }
   }
 })

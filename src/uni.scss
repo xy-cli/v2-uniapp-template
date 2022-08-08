@@ -17,7 +17,7 @@
 //}
 //背景图片
 @mixin bis($url){
-  background:{
+  background: {
     image:url($url);
     repeat: no-repeat;
     size: 100% 100%;
@@ -84,16 +84,8 @@
   flex-direction: column;
   align-items: center;
 }
-@mixin border1($color, $top: '1px', $right: '1px', $bottom: '1px', $left: '1px') {
-  background-image:linear-gradient(180deg, rgba(221, 221, 221, .4), rgba(221, 221, 221, .4) 50%, transparent 50%),
-  linear-gradient(270deg, rgba(221, 221, 221, .4), rgba(221, 221, 221, .4) 50%, transparent 50%),
-  linear-gradient(0deg, rgba(221, 221, 221, .4), rgba(221, 221, 221, .4) 50%, transparent 50%),
-  linear-gradient(90deg, rgba(221, 221, 221, .4), rgba(221, 221, 221, .4) 50%, transparent 50%);
-  background-size: 100% $top,$right 100% ,100% $bottom, $right 100%;
-  background-repeat: no-repeat;
-  background-position: top, right top,  bottom, left top;
-}
 
+$uni-width: 1000rpx;
 /* 颜色变量 */
 
 /* 行为相关颜色 */
@@ -107,6 +99,7 @@ $uni-color-error: #E9614F;
 $uni-color: #4FC3FF;
 //$uni-color2: #9080DF;
 $uni-color2: #4FC3FF;
+$uni-color-bg: #f5f5f8;
 
 /* 文字基本颜色 */
 $uni-text-color: rgba(8, 28, 56, .85); //基本色
@@ -168,11 +161,25 @@ body,html{
   background: linear-gradient(270deg, $uni-color 0%, $uni-color2 100%);
   box-shadow: $uni-btn-box-shadow;
 }
+/* 单行文字隐藏 */
 .elp{
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   display: inline-block;
+}
+/* 加载更多 u-loadmore 样式高度设置 */
+.load-more{
+  height: 100rpx!important;
+}
+/* 按钮置灰 */
+.disabled{
+  opacity: .3;
+  filter: grayscale(100%);
+}
+/* u-search icon 搜索兼容 */
+[type="search"]::-webkit-search-decoration {
+  display: none;
 }
 
 /* 底部固定按钮区 */

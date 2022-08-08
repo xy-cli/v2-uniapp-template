@@ -1,6 +1,13 @@
+/*
+ * @Author: ss shangs@schbrain.com
+ * @Date: 2022-05-23 11:24:30
+ * @LastEditors: ss shangs@schbrain.com
+ * @LastEditTime: 2022-08-08 10:48:23
+ * @FilePath: /v2-uni-app/src/main.js
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import Vue from 'vue'
 import App from './App'
-import emoji from '@/utils/emoji'
 import '@/utils/loading'
 
 // 此处为演示vuex使用，非uView的功能部分
@@ -11,15 +18,11 @@ import uView from 'uview-ui'
 
 import Vconsole from 'vconsole'
 
-import zzEmpty from './components/zz-empty'
-import qLoading from './qiun-data-charts/components/qiun-loading/qiun-loading'
-
 // http拦截器，将此部分放在new Vue()和app.$mount()之间，才能App.vue中正常使用
 import httpInterceptor from '@/common/http.interceptor.js'
 
 // http接口API抽离，免于写url或者一些固定的参数
 import httpApi from '@/common/http.api.js'
-Vue.directive('emoji', emoji)
 
 Vue.config.productionTip = false
 
@@ -33,8 +36,6 @@ if (process.env.VUE_APP_ENV === 'qa') {
   const vconsole = new Vconsole()
   Vue.use(vconsole)
 }
-Vue.component('zzEmpty', zzEmpty)
-Vue.component('qLoading', qLoading)
 const app = new Vue({
   store,
   ...App
@@ -42,15 +43,3 @@ const app = new Vue({
 Vue.use(httpInterceptor, app)
 Vue.use(httpApi, app)
 app.$mount()
-
-Vue.prototype.$setNavTitle = function (title) {
-  if (dd && dd.env.platform !== 'notInDingTalk') { // 判断钉钉环境
-    dd.ready(function () {
-      dd.biz.navigation.setTitle({
-        title: title // 控制标题文本，空字符串表示显示默认文本
-      })
-    })
-  } else {
-    document.title = title
-  }
-}

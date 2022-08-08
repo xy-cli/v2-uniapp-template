@@ -1,63 +1,28 @@
+<!--
+ * @Author: ss shangs@schbrain.com
+ * @Date: 2022-05-23 11:24:30
+ * @LastEditors: ss shangs@schbrain.com
+ * @LastEditTime: 2022-08-08 11:14:39
+ * @FilePath: /v2-uni-app/public/index.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<!--    <% if (process.env.VUE_APP_ENV === 'qa') { %>-->
-<!--    <meta name="wpk-bid" content="dta_2_83611">-->
-<!--    <% } %>-->
-<!--    <% if (process.env.VUE_APP_ENV === 'online') { %>-->
-<!--    <meta name="wpk-bid" content="dta_2_84534">-->
-<!--    <% } %>-->
     <title>
         <%= htmlWebpackPlugin.options.title %>
     </title>
-    <link rel="icon" href="<%= BASE_URL %>favicon.png">
-    <script src="https://g.alicdn.com/dingding/dingtalk-jsapi/2.10.3/dingtalk.open.js"></script>
-<!--    <script src="https://cdn.bootcdn.net/ajax/libs/ali-oss/6.16.0/aliyun-oss-sdk.min.js" async></script>-->
+    <link rel="icon" href="<%= BASE_URL %>static/logo.png">
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         document.documentElement.style.fontSize = document.documentElement.clientWidth / 20 + 'px'
       })
       var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') || CSS.supports('top: constant(a)'))
       document.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' + (coverSupport ? ', viewport-fit=cover' : '') + '" />')
-      function getQueryStringArgs() {
-        var qs = (location.search.length > 0 ? location.search.substring(1) : ""),
-          //保存数据的对象
-          args = {},
-          //取得每一项
-          items = qs.length ? qs.split("&") : [],
-          item = null,
-          name = null,
-          value = null,
-          //在 for 循环中使用
-          i = 0,
-          len = items.length;
-        //逐个将每一项添加到 args 对象中
-        for(i = 0; i < len; i++) {
-          item = items[i].split("=");
-          name = decodeURIComponent(item[0]);
-          value = decodeURIComponent(item[1]);
-          if(name.length) {
-            args[name] = value;
-          }
-        }
-        return args;
-      }
-      var query = getQueryStringArgs();
-      var wpkbid = query.wpkbid || 'dta_2_83611';
-      document.write('<meta name="wpk-bid" content="'+ wpkbid +'">');
-      !(function(c,i,e,b){var h=i.createElement("script");var f=i.getElementsByTagName("script")[0];h.type="text/javascript";h.crossorigin=true;h.onload=function(){c[b]||(c[b]=new c.wpkReporter({bid: wpkbid}));c[b].installAll()};f.parentNode.insertBefore(h,f);h.src=e})(window,document,"https://g.alicdn.com/woodpeckerx/jssdk??wpkReporter.js","__wpk");
     </script>
-    <!-- 测试环境钉钉统计 -->
-<!--    <% if (process.env.VUE_APP_ENV === 'qa') { %>-->
-<!--    <script></script>-->
-<!--    <% } %>-->
-<!--    &lt;!&ndash; 正式环境钉钉统计 &ndash;&gt;-->
-<!--    <% if (process.env.VUE_APP_ENV === 'online') { %>-->
-<!--    <script>    !(function(c,i,e,b){var h=i.createElement("script");var f=i.getElementsByTagName("script")[0];h.type="text/javascript";h.crossorigin=true;h.onload=function(){c[b]||(c[b]=new c.wpkReporter({bid:"dta_2_84534"}));c[b].installAll()};f.parentNode.insertBefore(h,f);h.src=e})(window,document,"https://g.alicdn.com/woodpeckerx/jssdk??wpkReporter.js","__wpk");</script>-->
-<!--    <% } %>-->
     <link rel="stylesheet" href="<%= BASE_URL %>static/index.<%= VUE_APP_INDEX_CSS_HASH %>.css" />
 </head>
 

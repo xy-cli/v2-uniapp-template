@@ -1,20 +1,16 @@
 /*
  * @Author: your name
  * @Date: 2021-11-23 09:32:26
- * @LastEditTime: 2021-11-26 14:02:36
- * @LastEditors: your name
+ * @LastEditTime: 2022-08-08 11:21:06
+ * @LastEditors: ss shangs@schbrain.com
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /uni-module/src/common/http.interceptor.js
  */
-import { getQueryStringArgs } from '../utils/utils'
-const _config = getQueryStringArgs()
 // 这里的vm，就是我们在vue文件里面的this，所以我们能在这里获取vuex的变量，比如存放在里面的token
 // 同时，我们也可以在此使用getApp().globalData，如果你把token放在getApp().globalData的话，也是可以使用的
 const install = (Vue, vm) => {
   Vue.prototype.$u.http.setConfig({
-    // baseUrl: `https://mobile-ms.uat.homecreditcfc.cn/mock/6128b7a40aa6f200277176b8/mini`, // mockApi地址
-    baseUrl: `https://weekly-api${process.env.VUE_APP_ENV === 'online' ? '' : '-dev'}.schbrain.com`,
-    // baseUrl: `https://www.fastmock.site/mock/95e9b6faf33674f6d8e83097fd1de600/week`,
+    baseUrl: 'https://www.fastmock.site/mock/95e9b6faf33674f6d8e83097fd1de600/week', // mockApi地址
     // 如果将此值设置为true，拦截回调中将会返回服务端返回的所有数据response，而不是response.data
     // 设置为true后，就需要在this.$u.http.interceptor.response进行多一次的判断，请打印查看具体值
     // originalData: true,
@@ -58,9 +54,6 @@ const install = (Vue, vm) => {
       return res.data
     } else if (res.data.code === -1) {
       vm.$toast.error('请重新登录!')
-      vm.$u.outLogin()
-      const url = _config.corpid ? '/?corpid=' + _config.corpid : '/'
-      uni.redirectTo({ url })
       return false
     } else {
       const message = /.*[\u4e00-\u9fa5]+.*$/.test(res.data.message) ? res.data.message : '服务异常请重试'

@@ -118,10 +118,10 @@ const data = {
       }
     },
     publicPath: publicPath,
-    title: '班级日志',
+    title: 'v2-uni-app',
     router: {
       mode: 'history',
-      base: '/uniApp/'
+      base: '/<%=camelCasedName%>/'
     },
     async: {
       loading: 'qLoading',
