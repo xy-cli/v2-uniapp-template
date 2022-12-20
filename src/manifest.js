@@ -15,8 +15,8 @@ console.log('读取git版本号:' + versionCode)
  * @type {{qa: string, prod: string}}
  */
 const paths = {
-  qa: 'https://schbrain-static-dev.schbrain.com/schbrain/frontend/dingtalk/dingtalk-classlog/' + versionCode + '/build/h5',
-  prod: 'https://schbrain-static-online.schbrain.com/schbrain/frontend/dingtalk/dingtalk-classlog/' + versionCode + '/build/h5'
+  qa: 'https://aliyunoss.com/' + versionCode + '/build/h5',
+  prod: 'https://aliyunoss.com/' + versionCode + '/build/h5'
 }
 console.log('当前：' + process.env.VUE_APP_ENV)
 const publicPath = process.env.VUE_APP_ENV === 'online' ? paths.prod : paths.qa
