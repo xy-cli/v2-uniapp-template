@@ -2,6 +2,7 @@
   "name": "<%=localName%>",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "serve": "npm run renewal && npm run dev:h5",
     "build": "VUE_APP_ENV=online npm run renewal && npm run build:h5",
